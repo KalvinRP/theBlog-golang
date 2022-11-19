@@ -1,0 +1,85 @@
+<html>
+<head>
+<title>Contact Me</title>
+<link rel="shortcut icon" href="asset/LogoDW.png">
+<link rel="stylesheet" href="style-myProject.css"/>     
+</head>
+
+<body style="background-color: #D6DBDF; width: 100%;">
+    <header>
+        <ul>
+            <li><a href="index.html" class="links"><img src="asset/LogoDW.png" height="45px" style="margin-left: 30px;"></a></li>
+            <li><a href="index.html" class="links">Home</a></li>
+            <li><a href="myProject.html" class="links";>My Project</a></li>
+            <li style="width:70%; display: flex; justify-content: flex-end;">
+                <a href="contact.html" class="button">Contact Me</a>
+            </li>
+        </ul>
+    </header>
+
+    <section>
+        <h1 style="font-size: 50px; font-weight:bolder; text-align: center; margin-bottom:0px;">
+            ADD MY PROJECT
+        </h1>
+    </br>
+    <div style="width:400px; background-color: transparent; margin-top: 0px; display: flex;flex-direction: column;justify-content: center;">
+        <label style="margin-top: 20px; font-weight:bolder">
+           Project Name
+        </label>
+        <input type="text" Id="pname" style="width:auto; box-shadow: 3px 5px grey; border: none;">
+
+        <nav style="margin-top: 20px; display: flex; background-color: transparent;">
+            <main>
+                <label style="margin:0px; font-weight: bolder;">
+                    Start Date
+                </label>
+                <input type="text" Id="sdate" style="width:auto; box-shadow: 3px 5px grey; border: none;">
+            </main>
+            <main style="display:flex; flex-direction:column; justify-content:flex-end">
+                <label style="margin:0px; font-weight: bolder;">
+                    End Date
+                    </label>
+                    <input type="text" Id="edate" style="width:auto; box-shadow: 3px 5px grey; border: none;">
+            </main>
+        </nav>
+        
+        <label style="margin-top: 20px; font-weight:bolder">
+            Description
+        </label>
+        <textarea Id="desc" rows="5" cols="50" style="box-shadow: 3px 5px grey;"> </textarea>
+
+        <label style="margin-top: 20px; font-weight:bolder">
+            Technologies
+        </label>
+        <table style="width:fit-content;">
+            <tr>
+                <td style="height:fit-content; width: 200px;">
+                    <input type="checkbox" Id="tech" name="node" style="width: fit-content; height: fit-content;"> <label for="node" style="margin:auto">Node Js</label>
+                </td>
+                <td style="height:fit-content; width: 200px;">
+                    <input type="checkbox" Id="tech" name="next" style="width: fit-content; height: fit-content;"> <label for="next" style="margin:auto">Next Js</label>
+                </td>
+            </tr>
+            <tr>
+                <td style="height:fit-content; width: 200px;">
+                    <input type="checkbox" Id="tech" name="react" style="width: fit-content; height: fit-content;"> <label for="react" style="margin:auto">React Js</label>
+                </td>
+                <td style="height:fit-content; width: 200px;">
+                    <input type="checkbox" Id="tech" name="tscript" style="width: fit-content; height: fit-content;"> <label for="tscript" style="margin:auto">TypeScript</label>
+                </td>
+            </tr>
+        </table>
+
+        <label style="margin-top: 20px; font-weight:bolder">
+            Upload Image
+         </label>
+         <input type="file" Id="image" style="width:auto; height: auto; background-color: aliceblue; box-shadow: 3px 5px grey;">
+
+        <button type="submit" class="submit" onclick="submisi()">
+            Submit
+        </button>
+         <div>
+    </section>
+    <script src="project.js"></script>
+</body>
+</html>
