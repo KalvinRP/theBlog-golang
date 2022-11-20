@@ -1,85 +1,91 @@
 <html>
 <head>
-<title>Contact Me</title>
+<title>Add My Project</title>
 <link rel="shortcut icon" href="asset/LogoDW.png">
 <link rel="stylesheet" href="style-myProject.css"/>     
 </head>
 
-<body style="background-color: #D6DBDF; width: 100%;">
+<body>
     <header>
         <ul>
             <li><a href="index.html" class="links"><img src="asset/LogoDW.png" height="45px" style="margin-left: 30px;"></a></li>
             <li><a href="index.html" class="links">Home</a></li>
             <li><a href="myProject.html" class="links";>My Project</a></li>
-            <li style="width:70%; display: flex; justify-content: flex-end;">
-                <a href="contact.html" class="button">Contact Me</a>
+            <li style="width:65%; display: flex; justify-content: flex-end;">
+                <a href="contact.html" class="buttoncon">Contact Me</a>
             </li>
         </ul>
     </header>
 
-    <section>
-        <h1 style="font-size: 50px; font-weight:bolder; text-align: center; margin-bottom:0px;">
+    <div class="sheet1">
+        <h1 class="labeltitle">
             ADD MY PROJECT
         </h1>
-    </br>
-    <div style="width:400px; background-color: transparent; margin-top: 0px; display: flex;flex-direction: column;justify-content: center;">
-        <label style="margin-top: 20px; font-weight:bolder">
+        </br>
+        <label class="label">
            Project Name
         </label>
-        <input type="text" Id="pname" style="width:auto; box-shadow: 3px 5px grey; border: none;">
+        <input type="text" Id="pname" class="input1">
 
-        <nav style="margin-top: 20px; display: flex; background-color: transparent;">
-            <main>
-                <label style="margin:0px; font-weight: bolder;">
+        <nav class="timesheet">
+            <main class="timemain">
+                <label class="timelabel">
                     Start Date
                 </label>
-                <input type="text" Id="sdate" style="width:auto; box-shadow: 3px 5px grey; border: none;">
+                <input type="date" Id="sdate" class="input1">
             </main>
-            <main style="display:flex; flex-direction:column; justify-content:flex-end">
-                <label style="margin:0px; font-weight: bolder;">
+            <main class="timemain">
+                <label class="timelabel">
                     End Date
                     </label>
-                    <input type="text" Id="edate" style="width:auto; box-shadow: 3px 5px grey; border: none;">
+                    <input type="date" Id="edate" class="input1">
             </main>
         </nav>
         
-        <label style="margin-top: 20px; font-weight:bolder">
+        <label class="label">
             Description
         </label>
-        <textarea Id="desc" rows="5" cols="50" style="box-shadow: 3px 5px grey;"> </textarea>
+        <textarea Id="desc" rows="5" cols="50" class="input1"></textarea>
 
-        <label style="margin-top: 20px; font-weight:bolder">
+        <label class="label">
             Technologies
         </label>
-        <table style="width:fit-content;">
+        <table>
             <tr>
-                <td style="height:fit-content; width: 200px;">
-                    <input type="checkbox" Id="tech" name="node" style="width: fit-content; height: fit-content;"> <label for="node" style="margin:auto">Node Js</label>
+                <td class="tableline">
+                    <input type="checkbox" Id="node" name="tech" class="checkbox" value='<img src="asset/icon-nodejs.png" class="prjtechicon";/>'> <label for="node" class="input2">Node Js</label>
                 </td>
-                <td style="height:fit-content; width: 200px;">
-                    <input type="checkbox" Id="tech" name="next" style="width: fit-content; height: fit-content;"> <label for="next" style="margin:auto">Next Js</label>
+                <td class="tableline">
+                    <input type="checkbox" Id="jscript" name="tech" class="checkbox" value='<img src="asset/icon-javascript.png" class="prjtechicon";/>'> <label for="jscript" class="input2">Javascript</label>
                 </td>
             </tr>
             <tr>
-                <td style="height:fit-content; width: 200px;">
-                    <input type="checkbox" Id="tech" name="react" style="width: fit-content; height: fit-content;"> <label for="react" style="margin:auto">React Js</label>
+                <td class="tableline">
+                    <input type="checkbox" Id="react" name="tech" class="checkbox" value='<img src="asset/icon-reactjs.png" class="prjtechicon";/>'> <label for="react" class="input2">React Js</label>
                 </td>
-                <td style="height:fit-content; width: 200px;">
-                    <input type="checkbox" Id="tech" name="tscript" style="width: fit-content; height: fit-content;"> <label for="tscript" style="margin:auto">TypeScript</label>
+                <td class="tableline">
+                    <input type="checkbox" Id="socket" name="tech" class="checkbox" value='<img src="asset/icon-socketio.png" class="prjtechicon";/>'> <label for="socket" class="input2">SocketIO</label>
                 </td>
             </tr>
         </table>
 
-        <label style="margin-top: 20px; font-weight:bolder">
+        <label class="label">
             Upload Image
          </label>
-         <input type="file" Id="image" style="width:auto; height: auto; background-color: aliceblue; box-shadow: 3px 5px grey;">
+         <input type="file" Id="image" class="input3">
 
-        <button type="submit" class="submit" onclick="submisi()">
+        <button type="submit" class="submit" id="btn" onclick="addData(event)">
             Submit
         </button>
-         <div>
-    </section>
-    <script src="project.js"></script>
+    </div>
+<br>
+<h1 class="labeltitle" style="background-color: wheat; border-top: 10px solid orangered;">
+    MY PROJECTS
+</h1>
+<div class="sheet2">
+    <div id="projects" class="prjsheet">
+    </div>
+</div>
+<script src="code-project.js"></script>
 </body>
 </html>

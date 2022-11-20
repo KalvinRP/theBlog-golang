@@ -38,21 +38,32 @@ header ul li {
     padding-right: 20px;
 }
 
-section {
+.sheet {
+    width:400px;
+    background-color: transparent;
+    margin-top: 0px;
+    margin: auto;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    justify-content: center;
 }
 
-section input {
-    width: 320px;
-    height: 30px;
-    border: none;
+.labeltitle {
+    font-size: 40px;
+    font-weight:bolder;
+    text-align: center;
+    margin-bottom:0px;
 }
 
-section label {
+.label {
     margin-top: 20px;
-    margin-right: 270px;
+    font-weight:bolder;
+}
+
+.input {
+    width:auto;
+    box-shadow: 3px 5px grey;
+    border: none;
 }
 
 .submit {

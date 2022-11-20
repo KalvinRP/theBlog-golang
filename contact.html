@@ -10,48 +10,46 @@
         <ul>
             <li><a href="index.html" class="links"><img src="asset/LogoDW.png" height="45px" style="margin-left: 30px;"></a></li>
             <li><a href="index.html" class="links">Home</a></li>
-            <li><a href="" class="links";>My Project</a></li>
+            <li><a href="myProject.html" class="links";>My Project</a></li>
             <li style="width:70%; display: flex; justify-content: flex-end;">
                 <a href="contact.html" class="button">Contact Me</a>
             </li>
         </ul>
     </header>
 
-    <section>
-        <h1 style="font-weight:bolder; margin-top: 60px;">GET IN TOUCH</h1>
-    </br>
-        <label style="margin-top: 0px;">
-            Name
+    <div class="sheet">
+        <h1 class="labeltitle">
+            GET IN TOUCH
+        </h1>
+        </br>
+        <label class="label">
+           Name:
         </label>
-        <input type="text" Id="nama">
-        
-        <label>
-            Email
+        <input type="text" Id="nama" class="input">
+        <label class="label">
+           Email:
         </label>
-        <input type="email" Id="surel">
-        
-        <label style="margin-right:200px">
-            Phone Number
+        <input type="email" Id="surel" class="input">
+        <label class="label">
+           Phone Number:
         </label>
-        <input type="text" Id="nomor">
-        
-        <label style="margin-right:260px;">
+        <input type="number" Id="nomor" class="input">
+        <label class="label">
             Subject
         </label>
-        <select style="width:auto;height: 30px;" id="subjek">
+        <select class="input" id="subjek">
             <option>Let's Talk</option>
             <option>Let's Go</option>
             <option>Suggestion</option>
         </select>
-        
-        <label style="margin-right:205px;">
-            Your Message
+        <label class="label">
+           Your Message:
         </label>
-        <textarea style="width:320px; height:120px" id="pesan"></textarea>
+        <textarea Id="pesan" rows="5" cols="50" class="input"></textarea>
 
         <button type="button" class="submit" onclick="submisi()">
             Submit
         </button>
-            <script src="code.js"></script>
+            <script src="code-contact.js"></script>
     </section>
 </body>
