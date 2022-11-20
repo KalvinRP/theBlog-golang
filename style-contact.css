@@ -38,34 +38,6 @@ header ul li {
     padding-right: 20px;
 }
 
-div {
-    width:1300px;
-    background-color: white;
-    margin: auto;
-    margin-top: 50px;
-    padding: 50px;
-    padding-top: 30px;
-    border-radius: 15px;
-}
-
-div ul {
-    list-style-type: none;
-    display: flex;
-}
-
-div ul li {
-    font-size: 25px;
-    margin-right: 45px;
-}
-
-div ul li mark {
-    margin-top: 0px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    background-color: rgb(202, 217, 161);
-}
-
 section {
     display: flex;
     flex-direction: column;
@@ -94,4 +66,8 @@ section label {
     padding-right: 20px;
     margin-top: 20px;
     margin-left: 210px;
+}
+
+.submit:active {
+    background-color: orangered;
 }
