@@ -64,6 +64,7 @@ header ul li {
     width:auto;
     box-shadow: 3px 5px grey;
     border: none;
+    padding: 5px;
 }
 
 .submit {
