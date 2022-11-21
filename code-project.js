@@ -8,7 +8,7 @@ function addData(event) {
   let edate = document.getElementById("edate").value;
   let desc = document.getElementById("desc").value;
   let tech = document.querySelectorAll('input[name="tech"]:checked');
-  let gambar = document.getElementById("image").files;
+  let picture = document.getElementById("image").files;
 
   let techno = []
   tech.forEach((checkbox) => {
@@ -23,11 +23,11 @@ function addData(event) {
     return alert('Kapan proyek berakhir?')
   } else if (desc == "") {
     return alert('Isi deskripsi proyek!')
-  } else if (gambar.length == 0) {
+  } else if (picture.length == 0) {
     return alert('gambar tidak boleh kosong!')
   }
 
-  let image = URL.createObjectURL(gambar[0])
+  let image = URL.createObjectURL(picture[0])
 
   let project = {
     name,
@@ -68,27 +68,27 @@ function projectPeek() {
   }
 }
 
-function lamaWaktu(durasi) {
+function lamaWaktu() {
   let sdate = document.getElementById("sdate").value;
   let edate = document.getElementById("edate").value;
 
-  selisih = (Date.parse(edate)) - (Date.parse(sdate))
-  harian = Math.floor(selisih / (1000 * 60 * 60 * 24))
-  bulanan = Math.floor(selisih / (1000 * 60 * 60 * 24 * 30))
-  tahunan = Math.floor(selisih / (1000 * 60 * 60 * 24 * 30 * 12))
-  sisahari = harian - (bulanan * 30)
-  sisabulan = bulanan - (tahunan * 12)
+  diff = (Date.parse(edate)) - (Date.parse(sdate))
+  daily = Math.floor(diff / (1000 * 60 * 60 * 24))
+  monthly = Math.floor(diff / (1000 * 60 * 60 * 24 * 30))
+  yearly = Math.floor(diff / (1000 * 60 * 60 * 24 * 30 * 12))
+  daysLeft = daily - (monthly * 30)
+  monthsLeft = monthly - (yearly * 12)
 
-  if (selisih < 0) {
+  if (diff < 0) {
     return alert('Masukkan tanggal dengan benar!');
   }
 
-  if (harian <= 30) {
-    return `${harian} hari`
-  } else if (harian <= 365) {
-    return `${bulanan} bulan ${sisahari} hari`
+  if (daily <= 30) {
+    return `${daily} hari`
+  } else if (daily <= 365) {
+    return `${monthly} bulan ${daysLeft} hari`
   } else {
-    return `${tahunan} tahun ${sisabulan} bulan`
+    return `${yearly} tahun ${monthsLeft} bulan`
   }
 
   // CODINGAN LAMA
