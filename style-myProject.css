@@ -175,7 +175,7 @@ header ul li {
 
 .prjtechicon {
     width: 20px;
-    margin-left: 10px;
+    margin-left: 25px;
     margin-bottom: 10px;
 }
 
@@ -191,6 +191,6 @@ header ul li {
 .prjtext {
     color: grey;
     text-align: justify;
-    margin-left: 10px;
-    margin-right: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
 }
