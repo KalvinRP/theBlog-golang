@@ -57,7 +57,7 @@ function projectPeek() {
     <div>
         <p class="prjtext">${data[index].desc}</p>
     </div>
-    <div>
+    <div class="iconholder">
         ${(data[index].techno).join(' ')}
     </div>
     <div>

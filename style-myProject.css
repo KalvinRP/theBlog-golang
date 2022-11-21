@@ -175,6 +175,9 @@ header ul li {
 
 .prjtechicon {
     width: 20px;
+}
+
+.iconholder {
     margin-left: 25px;
     margin-bottom: 10px;
 }
