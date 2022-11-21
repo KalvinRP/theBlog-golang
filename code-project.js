@@ -69,35 +69,54 @@ function projectPeek() {
 }
 
 function lamaWaktu(durasi) {
-  
   let sdate = document.getElementById("sdate").value;
   let edate = document.getElementById("edate").value;
 
-  let eyear = new Date(edate).getFullYear()
-  let emonth = new Date(edate).getMonth()
-  let eday = new Date(edate).getDate()
-  let syear = new Date(sdate).getFullYear()
-  let smonth = new Date(sdate).getMonth()
-  let sday = new Date(sdate).getDate()
+  selisih = (Date.parse(edate)) - (Date.parse(sdate))
+  harian = Math.floor(selisih / (1000 * 60 * 60 * 24))
+  bulanan = Math.floor(selisih / (1000 * 60 * 60 * 24 * 30))
+  tahunan = Math.floor(selisih / (1000 * 60 * 60 * 24 * 30 * 12))
+  sisahari = harian - (bulanan * 30)
+  sisabulan = bulanan - (tahunan * 12)
 
-  let yeardiff = (eyear - syear)
-  let monthdiff = (emonth - smonth)
-  let daydiff = (eday - sday)
+  if (selisih < 0) {
+    return alert('Masukkan tanggal dengan benar!');
+  }
+
+  if (harian <= 30) {
+    return `${harian} hari`
+  } else if (harian <= 365) {
+    return `${bulanan} bulan ${sisahari} hari`
+  } else {
+    return `${tahunan} tahun ${sisabulan} bulan`
+  }
+
+  // CODINGAN LAMA
+  // let eyear = new Date(edate).getFullYear()
+  // let emonth = new Date(edate).getMonth()
+  // let eday = new Date(edate).getDate()
+  // let syear = new Date(sdate).getFullYear()
+  // let smonth = new Date(sdate).getMonth()
+  // let sday = new Date(sdate).getDate()
+
+  // let yeardiff = (eyear - syear)
+  // let monthdiff = (emonth - smonth)
+  // let daydiff = (eday - sday)
   
   // FAILURE: IF looping jika form tidak reset
-  if (yeardiff < 0) {
-    return alert('Masukkan tahun dengan benar!')
-  } else if ((monthdiff < 0) && (yeardiff <= 0)) {
-    return alert('Masukkan bulan dengan benar')
-  } else if ((daydiff < 0) && (monthdiff <= 0) && (yeardiff < 0)) {
-    return alert('Masukkan tanggal dengan benar!')
-  }
+  // if (yeardiff < 0) {
+  //   return alert('Masukkan tahun dengan benar!')
+  // } else if ((monthdiff < 0) && (yeardiff <= 0)) {
+  //   return alert('Masukkan bulan dengan benar')
+  // } else if ((daydiff < 0) && (monthdiff <= 0) && (yeardiff < 0)) {
+  //   return alert('Masukkan tanggal dengan benar!')
+  // }
 
-  if (yeardiff > 0) {
-    return `${yeardiff} tahun`
-  } else if (monthdiff > 0) {
-    return `${monthdiff} bulan`
-  } else {
-    return `${daydiff} hari`
-  }
+  // if (yeardiff > 0) {
+  //   return `${yeardiff} tahun`
+  // } else if (monthdiff > 0) {
+  //   return `${monthdiff} bulan`
+  // } else {
+  //   return `${daydiff} hari`
+  // }
 }
