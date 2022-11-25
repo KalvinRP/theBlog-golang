@@ -1,55 +1,71 @@
 <html>
 <head>
-<title>Contact Me</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Home</title>
 <link rel="shortcut icon" href="asset/LogoDW.png">
-<link rel="stylesheet" href="style-contact.css"/>     
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="additions.css"/>
 </head>
 
-<body style="background-color: #D6DBDF; width: 100%;">
-    <header>
-        <ul>
-            <li><a href="index.html" class="links"><img src="asset/LogoDW.png" height="45px" style="margin-left: 30px;"></a></li>
-            <li><a href="index.html" class="links">Home</a></li>
-            <li><a href="myProject.html" class="links";>My Project</a></li>
-            <li style="width:70%; display: flex; justify-content: flex-end;">
-                <a href="contact.html" class="button">Contact Me</a>
-            </li>
-        </ul>
-    </header>
+<body>
+    <nav class="navbar navbar-expand-lg bg-dw fs-5">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="index.html"><img src="asset/LogoDW.png" height="40 em" class="ms-1"></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown" style="width: 2000px!important;">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="myProject.html">Add Project</a>
+              </li>
+            </ul>
+            <a class="position-absolute top-50 end-3 translate-middle-y" href="contact.html"><button type="button" class="btn btn-dark">Contact Me</button></a>
+          </div>
+        </div>
+      </nav>
 
-    <div class="sheet">
-        <h1 class="labeltitle">
+      <div class="container-sm">
+        <div>
+        <h1 class="fw-bolder text-center my-4">
             GET IN TOUCH
         </h1>
-        </br>
-        <label class="label">
-           Name:
-        </label>
-        <input type="text" Id="nama" class="input">
-        <label class="label">
-           Email:
-        </label>
-        <input type="email" Id="surel" class="input">
-        <label class="label">
-           Phone Number:
-        </label>
-        <input type="number" Id="nomor" class="input">
-        <label class="label">
-            Subject
-        </label>
-        <select class="input" id="subjek">
-            <option>Let's Talk</option>
-            <option>Let's Go</option>
-            <option>Suggestion</option>
-        </select>
-        <label class="label">
-           Your Message:
-        </label>
-        <textarea Id="pesan" rows="5" cols="50" class="input"></textarea>
-
-        <button type="button" class="submit" onclick="submisi()">
-            Submit
-        </button>
-            <script src="code-contact.js"></script>
-    </section>
+        </div>
+        <form>
+            <div class="mb-3">
+                <label for="nama" class="form-label">Name</label>
+                <input type="text" class="form-control" id="nama" aria-describedby="emailHelp">
+              </div>
+            <div class="mb-3">
+              <label for="surel" class="form-label">Email address</label>
+              <input type="email" class="form-control" id="surel" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+              <label for="nomor" class="form-label">Phone Number</label>
+              <input type="number" class="form-control" id="nomor">
+            </div>
+            <div class="mb-3">
+                <select class="form-select" id="subjek" aria-label="Default select example">
+                    <option selected>Subject</option>
+                    <option value="1">Let's Talk</option>
+                    <option value="2">Request</option>
+                    <option value="3">Donations</option>
+                  </select>
+            </div>
+            <div class="form-floating mb-3">
+                <textarea class="form-control" placeholder="Hi!" id="pesan" style="height: 100px"></textarea>
+                <label for="floatingTextarea2">Your Message</label>
+            </div>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button type="submit" class="btn btn-wheat" onclick="submisi()">Submit</button>
+            </div>
+          </form>
+      </div>
+    <script src="code-contact.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 </body>
+</html>

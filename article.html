@@ -1,63 +1,76 @@
 <html>
 <head>
-<title>My Dummy Article</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Home</title>
 <link rel="shortcut icon" href="asset/LogoDW.png">
-<link rel="stylesheet" href="style-article.css"/>     
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="additions.css"/>
+
 </head>
 
-<body style="background-color: #D6DBDF; width: 100%;">
-    <header>
-        <ul>
-            <li><a href="index.html" class="links"><img src="asset/LogoDW.png" height="45px" style="margin-left: 30px;"></a></li>
-            <li><a href="index.html" class="links">Home</a></li>
-            <li><a href="myProject.html" class="links";>My Project</a></li>
-            <li style="width:70%; display: flex; justify-content: flex-end;">
-                <a href="contact.html" class="button">Contact Me</a>
-            </li>
-        </ul>
-    </header>
+<body>
+    <nav class="navbar navbar-expand-lg bg-dw fs-5">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="index.html"><img src="asset/LogoDW.png" height="40 em" class="ms-1"></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown" style="width: 2000px!important;">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="myProject.html">Add Project</a>
+              </li>
+            </ul>
+            <a class="position-absolute top-50 end-3 translate-middle-y" href="contact.html"><button type="button" class="btn btn-dark">Contact Me</button></a>
+          </div>
+        </div>
+      </nav>
 
 <body>
-    <div class="fullbody">
+    <div class="container-xl mt-4 py-3">
         <strong>
-        <h1 style="text-align: center; margin-bottom: 50px;">My Dummy Article</h1>
+        <h1 class="text-center mb-5 fw-bolder">My Dummy Article</h1>
         </strong>
-        <div class="body">
-        <img src="asset/dummy-img.png" alt="dummypic" class="coverpic"/>
+        <div class="container-fluid d-flex">
+        <img src="asset/dummy-img.png" alt="blogimage" class="coverpic me-5 mb-5"/>
         <div class="details">
             <h3>
                 Duration
             </h3>
                 <p>
-                    <img src="asset/icon-calendar.png" class="icons"/> 12 Jan 2021 - 11 Feb 2021
+                    <img src="asset/icon-calendar.png" class="icons mt-0 ms-2 text-muted"/> 12 Jan 2021 - 11 Feb 2021
                 </p>
                 <p>
-                    <img src="asset/icon-clock.png" class="icons"/> 1 month
+                    <img src="asset/icon-clock.png" class="icons mt-0 ms-2 text-muted"/> 1 month
                 </p>
             <h3>
                 Technologies
             </h3>
-            <table>
-                <tr style="color:gray">
+            <table class="table table-borderless">
+                <tr class="text-muted mb-2">
                     <td>
-                        <img src="asset/icon-reactjs.png" class="icons"/> React Js
+                        <img src="asset/icon-reactjs.png" class="icons mt-0"/> React Js
                     </td>
                     <td>
-                        <img src="asset/icon-javascript.png"  class="icons"/> JavaScript
+                        <img src="asset/icon-javascript.png"  class="icons mt-0"/> JavaScript
                     </td>
                 </tr>
-                <tr style="color: gray;">
+                <tr class="text-muted mb-2">
                     <td>
-                        <img src="asset/icon-nodejs.png"  class="icons"/> Node Js
+                        <img src="asset/icon-nodejs.png"  class="icons mt-0"/> Node Js
                     </td>
                     <td>
-                        <img src="asset/icon-socketio.png"  class="icons"/> Socket IO
+                        <img src="asset/icon-socketio.png"  class="icons mt-0"/> Socket IO
                     </td>
                 </tr>
             </table>
         </div>
         </div>
-        <p class="texts">
+        <p class="lh-lg justify">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer viverra ante orci, rutrum elementum neque finibus quis. Proin dictum nulla orci, vitae tempus diam commodo at. Mauris maximus lorem nec elit auctor pulvinar. In ac eros finibus sapien cursus tempus. Proin elementum fermentum cursus. Nam laoreet, nisl in pharetra aliquet, leo est ornare turpis, ac aliquam est nibh nec neque. Nulla id eros ac turpis fringilla semper. Etiam ut nisi ut ipsum consectetur semper quis auctor odio. Etiam vel imperdiet nibh. In interdum nibh nec diam dictum maximus. Morbi posuere nisi sit amet mi dignissim tristique. Ut rutrum aliquam luctus. In hac habitasse platea dictumst. Duis tempor sem nulla, a rutrum arcu placerat id. Quisque sit amet ligula quam.<br>
             Phasellus nibh leo, tristique eget suscipit nec, pellentesque ut libero. Nullam finibus suscipit eros, id cursus eros condimentum malesuada. Sed iaculis porta purus in convallis. Nulla a dui sem. Proin vehicula dapibus dictum. Nulla vel lacus at quam dapibus suscipit nec non mi. Vestibulum lobortis bibendum elementum. Nunc eu ligula blandit, bibendum ipsum facilisis, feugiat velit. Praesent eu est porttitor, scelerisque justo facilisis, vulputate ligula. Aliquam erat volutpat. Cras sed mi nec lorem volutpat pulvinar.<br>
             Suspendisse arcu mi, bibendum ac libero non, laoreet accumsan metus. Nullam facilisis massa at elit laoreet, id vulputate eros iaculis. Nam eget posuere quam. Vestibulum non ex mi. Suspendisse in turpis eu enim pulvinar malesuada non et turpis. Vestibulum fermentum cursus turpis, ac placerat turpis tristique consectetur. Aenean ligula leo, vehicula sed ultrices sed, placerat vitae risus. Praesent suscipit ullamcorper odio, vel venenatis nulla lobortis ac. Aliquam congue neque velit, et elementum tellus porttitor eu. Fusce quis vestibulum massa, quis porttitor lectus. Quisque facilisis tortor vitae lectus feugiat, quis convallis dui fringilla. Duis consequat mi id enim bibendum, sed elementum tortor tincidunt. Mauris ac nibh ac tortor gravida ornare. Duis eu fringilla dolor, eu ullamcorper dolor.<br>
@@ -65,4 +78,6 @@
             Ut semper hendrerit sapien nec feugiat. Duis ultrices massa dui, ut mattis metus dapibus ac. Praesent non aliquet leo. Nulla mollis mauris eget diam luctus porta. Cras elementum, libero a consectetur blandit, dolor libero lacinia enim, at dignissim magna ligula quis orci. Aenean convallis odio vitae elementum congue. Praesent nec eros turpis. Cras tincidunt in lacus at finibus. Suspendisse ultricies sollicitudin lectus, eleifend porttitor urna pulvinar ac. Pellentesque blandit dignissim odio eu cursus. Nunc ac sem in tellus convallis imperdiet. Curabitur commodo massa leo, non imperdiet est volutpat sed.
         </p>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 </body>
+</html>
