@@ -61,26 +61,6 @@ func project(w http.ResponseWriter, r *http.Request) {
 	tmpt.Execute(w, nil)
 }
 
-type prj struct {
-	prjName   string
-	startDate string
-	endDate   string
-	desc      string
-	tech      string
-	img       string
-}
-
-var addprj = []prj{
-	{
-		prjName:   "",
-		startDate: "",
-		endDate:   "",
-		desc:      "",
-		tech:      "",
-		img:       "",
-	},
-}
-
 func addproject(w http.ResponseWriter, r *http.Request) {
 	eror := r.ParseForm()
 
@@ -92,23 +72,8 @@ func addproject(w http.ResponseWriter, r *http.Request) {
 	sdate := r.PostForm.Get("sdate")
 	edate := r.PostForm.Get("edate")
 	desc := r.PostForm.Get("desc")
-	// tech := r.PostForm.Get("tech")
-	// image := r.PostForm.Get("image")
 
 	fmt.Println(pname, sdate, edate, desc)
-
-	// var newprj = prj{
-	// 	prjName:   pname,
-	// 	startDate: sdate,
-	// 	endDate:   edate,
-	// 	desc:      desc,
-	// 	tech:      tech,
-	// 	img:       image,
-	// }
-
-	// addprj = append(addprj, newprj)
-
-	// http.Redirect(w, r, "/", http.StatusMovedPermanently)
 }
 
 func article(w http.ResponseWriter, r *http.Request) {
