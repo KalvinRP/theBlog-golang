@@ -35,7 +35,7 @@
             ADD MY PROJECT
         </h1>
         </div>
-            <form action="/add-project" method="post">
+            <form action="/add-project" method="post" enctype="multipart/form-data"> <!-- enctype="multipart/form-data" -->
             <div class="mb-3">
                 <label for="pname" class="form-label">Project Name</label>
                 <input type="text" name="prjname" class="form-control" id="pname" aria-describedby="projectName">

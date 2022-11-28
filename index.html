@@ -63,119 +63,29 @@
         MY PROJECTS
     </h1>
     <div class="container-fluid d-flex flex-wrap-reverse justify-content-sm-between bg-wheat pt-5">
-        <div class="container-md container-card bg-light py-4 mb-3">
-            <div class="d-flex justify-content-center mx-3"1>
-                <img src="asset/dummy-1.jpg" style="width: 300px; height: 300px; object-fit: cover;">
-            </div>
-            <div class="text-center fw-bold my-3 fs-3">
-                <a href="http://localhost:5000/article" target="_blank" class="prjtitle">The Very First Project</a>
-            </div>
-            <div>
-                <p class="lh-sm mx-4 text-muted">durasi: 3 bulan</p>
-            </div>
-            <div>
-                <p class="lh-sm justify mx-4">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-            </div>
-            <div class="ms-4 mb-3">
-                <img src="asset/icon-javascript.png" class="icons";/>
-            </div>
-            <div>
-                <button class="mx-4 btn btn-warning">edit</button>
-                <button class="btn btn-danger">delete</button>
-            </div>
-        </div>
+        {{range $index, $data := .Project}}
         <div class="container-md container-card bg-light py-4 mb-3">
             <div class="d-flex justify-content-center mx-3">
-                <img src="asset/dummy-2.jpg" style="width: 300px; height: 300px; object-fit: cover;">
+                <img src="{{$data.img}}" style="width: 15rem; height: 20rem; object-fit: cover;">
             </div>
             <div class="text-center fw-bold my-3 fs-3">
-                <a href="http://localhost:5000/article" target="_blank" class="prjtitle">Big Improvements</a>
+                <a href="http://localhost:5000/article" target="_blank" class="prjtitle">{{$data.prjName}}</a>
             </div>
             <div>
-                <p class="lh-sm mx-4 text-muted">durasi: 1 bulan 22 hari</p>
+                <p class="lh-sm mx-4 text-muted">durasi: {{$data.duration}} hari</p>
             </div>
             <div>
-                <p class="lh-sm justify mx-4">Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance.</p>
+                <p class="lh-sm justify mx-4">{{$data.desc}}</p>
             </div>
             <div class="ms-4 mb-3">
-                <img src="asset/icon-nodejs.png" class="icons";/>
-                <img src="asset/icon-javascript.png" class="icons";/>
-                <img src="asset/icon-reactjs.png" class="icons";/>
-                <img src="asset/icon-socketio.png" class="icons";/>
+                {{$data.tech}}
             </div>
             <div>
                 <button class="mx-4 btn btn-warning">edit</button>
                 <button class="btn btn-danger">delete</button>
             </div>
         </div>
-        <div class="container-md container-card bg-light py-4 mb-3">
-            <div class="d-flex justify-content-center mx-3">
-                <img src="asset/dummy-3.jpg" style="width: 300px; height: 300px; object-fit: cover;">
-            </div>
-            <div class="text-center fw-bold my-3 fs-3">
-                <a href="http://localhost:5000/article" target="_blank" class="prjtitle">Reviewing First Project</a>
-            </div>
-            <div>
-                <p class="lh-sm mx-4 text-muted">durasi: 14 hari</p>
-            </div>
-            <div>
-                <p class="lh-sm justify mx-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi auctor mauris id lacus tincidunt, nec hendrerit lectus suscipit.</p>
-            </div>
-            <div class="ms-4 mb-3">
-                <img src="asset/icon-nodejs.png" class="icons";/>
-                <img src="asset/icon-javascript.png" class="icons";/>
-                <img src="asset/icon-reactjs.png" class="icons";/>
-                <img src="asset/icon-socketio.png" class="icons";/>
-            </div>
-            <div>
-                <button class="mx-4 btn btn-warning">edit</button>
-                <button class="btn btn-danger">delete</button>
-            </div>
-        </div>
-        <div class="container-md container-card bg-light py-4 mb-3">
-            <div class="d-flex justify-content-center mx-3">
-                <img src="asset/dummy-4.jpg" style="width: 300px; height: 300px; object-fit: cover;">
-            </div>
-            <div class="text-center fw-bold my-3 fs-3">
-                <a href="http://localhost:5000/article" target="_blank" class="prjtitle">Small New Project</a>
-            </div>
-            <div>
-                <p class="lh-sm mx-4 text-muted">durasi: 7 hari</p>
-            </div>
-            <div>
-                <p class="lh-sm justify mx-4">Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit....</p>
-            </div>
-            <div class="ms-4 mb-3">
-                <img src="asset/icon-javascript.png" class="icons";/>
-                <img src="asset/icon-reactjs.png" class="icons";/>
-            </div>
-            <div>
-                <button class="mx-4 btn btn-warning">edit</button>
-                <button class="btn btn-danger">delete</button>
-            </div>
-        </div>
-        <div class="container-md container-card bg-light py-4 mb-3">
-            <div class="d-flex justify-content-center mx-3">
-                <img src="asset/dummy-5.jpg" style="width: 15rem; height: 20rem; object-fit: cover;">
-            </div>
-            <div class="text-center fw-bold my-3 fs-3">
-                <a href="http://localhost:5000/article" target="_blank" class="prjtitle">My Second Project</a>
-            </div>
-            <div>
-                <p class="lh-sm mx-4 text-muted">durasi: 1 tahun 4 bulan</p>
-            </div>
-            <div>
-                <p class="lh-sm justify mx-4">Phasellus a ex sed felis laoreet molestie. Nulla eu lectus massa. Curabitur sollicitudin eros purus, non tristique turpis suscipit eget. Phasellus ac neque neque.</p>
-            </div>
-            <div class="ms-4 mb-3">
-                <img src="asset/icon-nodejs.png" class="icons";/>
-                <img src="asset/icon-javascript.png" class="icons";/>
-            </div>
-            <div>
-                <button class="mx-4 btn btn-warning">edit</button>
-                <button class="btn btn-danger">delete</button>
-            </div>
-        </div>
+        {{end}}
     </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 </body>
