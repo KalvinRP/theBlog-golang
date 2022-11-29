@@ -12,20 +12,20 @@
 <body>
     <nav class="navbar navbar-expand-lg bg-dw fs-5">
         <div class="container-fluid">
-          <a class="navbar-brand" href="http://localhost:5000/"><img src="asset/LogoDW.png" height="40 em" class="ms-1"></a>
+          <a class="navbar-brand" href="/"><img src="asset/LogoDW.png" height="40 em" class="ms-1"></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarNavDropdown" style="width: 2000px!important;">
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link active fw-bold" href="http://localhost:5000/">Home</a>
+                <a class="nav-link active fw-bold" href="/">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="http://localhost:5000/add-project">Add Project</a>
+                <a class="nav-link" href="/add-project">Add Project</a>
               </li>
             </ul>
-            <a class="position-absolute top-50 end-3 translate-middle-y" href="http://localhost:5000/contact"><button type="button" class="btn btn-dark">Contact Me</button></a>
+            <a class="position-absolute top-50 end-3 translate-middle-y" href="/contact"><button type="button" class="btn btn-dark">Contact Me</button></a>
           </div>
         </div>
       </nav>
@@ -66,23 +66,23 @@
         {{range $index, $data := .Project}}
         <div class="container-md container-card bg-light py-4 mb-3">
             <div class="d-flex justify-content-center mx-3">
-                <img src="{{$data.img}}" style="width: 15rem; height: 20rem; object-fit: cover;">
+                <img src="asset/dummy-4.jpg" style="width: 15rem; height: 20rem; object-fit: cover;">
             </div>
             <div class="text-center fw-bold my-3 fs-3">
-                <a href="http://localhost:5000/article" target="_blank" class="prjtitle">{{$data.prjName}}</a>
+                <a href="/article/{{$index}}" target="_blank" class="prjtitle">{{$data.PrjName}}</a>
             </div>
             <div>
-                <p class="lh-sm mx-4 text-muted">durasi: {{$data.duration}} hari</p>
+                <p class="lh-sm mx-4 text-muted">durasi: {{$data.Duration}} hari</p>
             </div>
             <div>
-                <p class="lh-sm justify mx-4">{{$data.desc}}</p>
+                <p class="lh-sm justify mx-4">{{$data.Desc}}</p>
             </div>
             <div class="ms-4 mb-3">
-                {{$data.tech}}
+                {{$data.Tech}}
             </div>
             <div>
-                <button class="mx-4 btn btn-warning">edit</button>
-                <button class="btn btn-danger">delete</button>
+                <a href="#" target="_blank" class="button">edit</a>
+                <a href="/delete/{{$index}}" target="_blank" class="button">delete</a>
             </div>
         </div>
         {{end}}

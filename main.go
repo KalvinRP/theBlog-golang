@@ -3,11 +3,9 @@ package main
 import (
 	"fmt"
 	"html/template"
-	"io"
 	"log"
 	"net/http"
-	"os"
-	"path/filepath"
+	"strconv"
 	"time"
 
 	"github.com/gorilla/mux"
@@ -22,69 +20,35 @@ func main() {
 	route.HandleFunc("/contact", contact).Methods("GET")
 	route.HandleFunc("/add-project", project).Methods("GET")
 	route.HandleFunc("/add-project", addprojects).Methods("POST")
-	route.HandleFunc("/article", article).Methods("GET")
+	route.HandleFunc("/article/{ID}", article).Methods("GET")
+	route.HandleFunc("/delete/{index}", delete).Methods("GET")
 
 	var port string = "5000"
 	fmt.Print("Server running on port " + port)
 	http.ListenAndServe("localhost:"+port, route)
 }
 
-func contact(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-type", "text/html; charset=utf-8")
-	tmpt, err := template.ParseFiles("contact.html")
-
-	if err != nil {
-		w.Write([]byte(err.Error()))
-		return
-	}
-
-	tmpt.Execute(w, nil)
+type Prj struct {
+	PrjName  string
+	Duration int
+	Desc     string
+	Tech     []string
+	// img      string
 }
 
-func home(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-type", "text/html; charset=utf-8")
-	tmpt, err := template.ParseFiles("index.html")
-
-	if err != nil {
-		w.Write([]byte(err.Error()))
-		return
-	}
-
-	addprj := map[string]interface{}{
-		"Project": addprj,
-	}
-
-	fmt.Println(addprj)
-
-	tmpt.Execute(w, addprj)
+var Addprj = []Prj{
+	{
+		PrjName:  "Placeholder",
+		Duration: 22,
+		Desc:     "Lorem ipsum",
+		// Tech:     techno,
+		// img:      fileLocation,
+	},
 }
-
-func project(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-type", "text/html; charset=utf-8")
-	tmpt, err := template.ParseFiles("myProject.html")
-
-	if err != nil {
-		w.Write([]byte(err.Error()))
-		return
-	}
-
-	tmpt.Execute(w, nil)
-}
-
-type prj struct {
-	prjName  string
-	duration float64
-	desc     string
-	tech     []string
-	img      string
-}
-
-var addprj = []prj{{}}
 
 func addprojects(w http.ResponseWriter, r *http.Request) {
-	// err := r.ParseForm()
-
-	err := r.ParseMultipartForm(1024)
+	err := r.ParseForm()
+	// err := r.ParseMultipartForm(1024)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -101,48 +65,101 @@ func addprojects(w http.ResponseWriter, r *http.Request) {
 	end := edate + " 00:00:00"
 	t2, _ := time.Parse(format, end) //reflect.TypeOf(t2) = time.Time
 
-	duration := t2.Sub(t1)
-	duratext := duration.Hours() / 24
+	Duration := t2.Sub(t1)
+	duratext := int(Duration.Hours() / 24)
 
-	desc := r.Form.Get("desc")
+	Desc := r.Form.Get("desc")
 
 	techno := r.Form["tech"]
 
-	image, imgname, err := r.FormFile("image")
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-	defer image.Close()
-	dir, err := os.Getwd()
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-	filename := imgname.Filename
-	fileLocation := filepath.Join(dir, "submittedImage", filename)
-	targetFile, err := os.OpenFile(fileLocation, os.O_WRONLY|os.O_CREATE, 0666)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-	defer targetFile.Close()
-	if _, err := io.Copy(targetFile, image); err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
+	// image, imgname, err := r.FormFile("image")
+	// if err != nil {
+	// 	http.Error(w, err.Error(), http.StatusInternalServerError)
+	// 	return
+	// }
+	// defer image.Close()
+	// dir, err := os.Getwd()
+	// if err != nil {
+	// 	http.Error(w, err.Error(), http.StatusInternalServerError)
+	// 	return
+	// }
+	// filename := imgname.Filename
+	// fileLocation := filepath.Join(dir, "submittedImage", filename)
+	// targetFile, err := os.OpenFile(fileLocation, os.O_WRONLY|os.O_CREATE, 0666)
+	// if err != nil {
+	// 	http.Error(w, err.Error(), http.StatusInternalServerError)
+	// 	return
+	// }
+	// defer targetFile.Close()
+	// if _, err := io.Copy(targetFile, image); err != nil {
+	// 	http.Error(w, err.Error(), http.StatusInternalServerError)
+	// 	return
+	// }
 	//fileupload
-	var newprj = prj{
-		prjName:  pname,
-		duration: duratext,
-		desc:     desc,
-		tech:     techno,
-		img:      fileLocation,
+	var newprj = Prj{
+		PrjName:  pname,
+		Duration: duratext,
+		Desc:     Desc,
+		Tech:     techno,
+		// img:      fileLocation,
 	}
 
-	addprj = append(addprj, newprj)
+	// fmt.Println(newprj) //Result: Working
+
+	Addprj = append(Addprj, newprj)
 
 	http.Redirect(w, r, "/", http.StatusMovedPermanently)
+}
+
+func home(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-type", "text/html; charset=utf-8")
+	tmpt, err := template.ParseFiles("index.html")
+
+	if err != nil {
+		w.Write([]byte(err.Error()))
+		return
+	}
+
+	project := map[string]interface{}{
+		"Project": Addprj,
+	}
+
+	// fmt.Println(project) //Result: Working
+
+	tmpt.Execute(w, project)
+}
+
+func delete(w http.ResponseWriter, r *http.Request) {
+	index, _ := strconv.Atoi(mux.Vars(r)["index"])
+	fmt.Println(index)
+
+	Addprj = append(Addprj[:index], Addprj[index+1:]...)
+
+	http.Redirect(w, r, "/", http.StatusFound)
+}
+
+func contact(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-type", "text/html; charset=utf-8")
+	tmpt, err := template.ParseFiles("contact.html")
+
+	if err != nil {
+		w.Write([]byte(err.Error()))
+		return
+	}
+
+	tmpt.Execute(w, nil)
+}
+
+func project(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-type", "text/html; charset=utf-8")
+	tmpt, err := template.ParseFiles("myProject.html")
+
+	if err != nil {
+		w.Write([]byte(err.Error()))
+		return
+	}
+
+	tmpt.Execute(w, nil)
 }
 
 func article(w http.ResponseWriter, r *http.Request) {
@@ -154,5 +171,25 @@ func article(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	tmpt.Execute(w, nil)
+	ID, _ := strconv.Atoi(mux.Vars(r)["ID"])
+
+	var Detail = Prj{}
+
+	for index, data := range Addprj {
+		if index == ID {
+			Detail = Prj{
+				PrjName:  data.PrjName,
+				Duration: data.Duration,
+				Desc:     data.Desc,
+				Tech:     data.Tech,
+				// img:   data.img,
+			}
+		}
+	}
+
+	article := map[string]interface{}{
+		"Article": Detail,
+	}
+
+	tmpt.Execute(w, article)
 }

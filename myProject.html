@@ -11,20 +11,20 @@
 <body>
     <nav class="navbar navbar-expand-lg bg-dw fs-5">
         <div class="container-fluid">
-          <a class="navbar-brand" href="http://localhost:5000/"><img src="asset/LogoDW.png" height="40 em" class="ms-1"></a>
+          <a class="navbar-brand" href="/"><img src="asset/LogoDW.png" height="40 em" class="ms-1"></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarNavDropdown" style="width: 2000px!important;">
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link" href="http://localhost:5000/">Home</a>
+                <a class="nav-link" href="/">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active fw-bold" href="http://localhost:5000/add-project">Add Project</a>
+                <a class="nav-link active fw-bold" href="/add-project">Add Project</a>
               </li>
             </ul>
-            <a class="position-absolute top-50 end-3 translate-middle-y" href="http://localhost:5000/contact"><button type="button" class="btn btn-dark">Contact Me</button></a>
+            <a class="position-absolute top-50 end-3 translate-middle-y" href="/contact"><button type="button" class="btn btn-dark">Contact Me</button></a>
           </div>
         </div>
     </nav>
@@ -35,7 +35,7 @@
             ADD MY PROJECT
         </h1>
         </div>
-            <form action="/add-project" method="post" enctype="multipart/form-data"> <!-- enctype="multipart/form-data" -->
+            <form action="/add-project" method="post"> <!-- enctype="multipart/form-data" -->
             <div class="mb-3">
                 <label for="pname" class="form-label">Project Name</label>
                 <input type="text" name="prjname" class="form-control" id="pname" aria-describedby="projectName">
@@ -62,13 +62,13 @@
                 <table class="table table-borderless">
                     <tr>
                         <td>
-                            <input class="form-check-input" type="checkbox" name="tech" value='<img src="asset/icon-nodejs.png" class="prjtechicon";/>' id="node">
+                            <input class="form-check-input" type="checkbox" name="tech" value='Node JS' id="node">
                             <label class="form-check-label" for="node">
                                 Node JS
                             </label>
                         </td>
                         <td>
-                            <input class="form-check-input" type="checkbox" name="tech" value='<img src="asset/icon-javascript.png" class="prjtechicon";/>' id="jscript">
+                            <input class="form-check-input" type="checkbox" name="tech" value='JavaScript' id="jscript">
                             <label class="form-check-label" for="jscript">
                                 Javascript
                             </label>
@@ -76,13 +76,13 @@
                     </tr>
                     <tr>
                         <td>
-                            <input class="form-check-input" type="checkbox" name="tech" value='<img src="asset/icon-reactjs.png" class="prjtechicon";/>' id="react">
+                            <input class="form-check-input" type="checkbox" name="tech" value='React JS' id="react">
                             <label class="form-check-label" for="react">
                                 React JS
                             </label>
                         </td>
                         <td>
-                            <input class="form-check-input" type="checkbox" name="tech" value='<img src="asset/icon-socketio.png" class="prjtechicon";/>' id="socket">
+                            <input class="form-check-input" type="checkbox" name="tech" value='SocketIO' id="socket">
                             <label class="form-check-label" for="socket">
                                 SocketIO
                             </label>

@@ -87,3 +87,15 @@ body {
     padding: var(--bs-card-spacer-y) var(--bs-card-spacer-x);
     color: var(--bs-card-color);
   }
+
+.button {
+    background-color: black;
+    color: white;
+    font-size: 18px;
+    text-decoration: none;
+    border-radius: 10px;
+    border: none;
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
