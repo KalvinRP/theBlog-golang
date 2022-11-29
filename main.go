@@ -16,11 +16,11 @@ func main() {
 
 	route.PathPrefix("/asset").Handler(http.StripPrefix("/asset", http.FileServer(http.Dir("./asset"))))
 
+	route.HandleFunc("/article/{ID}", article).Methods("GET")
 	route.HandleFunc("/", home).Methods("GET")
 	route.HandleFunc("/contact", contact).Methods("GET")
 	route.HandleFunc("/add-project", project).Methods("GET")
 	route.HandleFunc("/add-project", addprojects).Methods("POST")
-	route.HandleFunc("/article/{ID}", article).Methods("GET")
 	route.HandleFunc("/delete/{index}", delete).Methods("GET")
 
 	var port string = "5000"
