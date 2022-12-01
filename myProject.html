@@ -1,4 +1,4 @@
-<html>
+<html lang="id">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -35,7 +35,7 @@
             ADD MY PROJECT
         </h1>
         </div>
-            <form action="/add-project" method="post"> <!-- enctype="multipart/form-data" -->
+            <form action="/add-project" method="post" enctype="multipart/form-data"> <!-- enctype="multipart/form-data" -->
             <div class="mb-3">
                 <label for="pname" class="form-label">Project Name</label>
                 <input type="text" name="prjname" class="form-control" id="pname" aria-describedby="projectName">
@@ -62,13 +62,13 @@
                 <table class="table table-borderless">
                     <tr>
                         <td>
-                            <input class="form-check-input" type="checkbox" name="tech" value='Node JS' id="node">
+                            <input class="form-check-input" type="checkbox" name="tech" value="Node JS" id="node">
                             <label class="form-check-label" for="node">
                                 Node JS
                             </label>
                         </td>
                         <td>
-                            <input class="form-check-input" type="checkbox" name="tech" value='JavaScript' id="jscript">
+                            <input class="form-check-input" type="checkbox" name="tech" value="JavaScript" id="jscript">
                             <label class="form-check-label" for="jscript">
                                 Javascript
                             </label>
@@ -76,13 +76,13 @@
                     </tr>
                     <tr>
                         <td>
-                            <input class="form-check-input" type="checkbox" name="tech" value='React JS' id="react">
+                            <input class="form-check-input" type="checkbox" name="tech" value="React JS" id="react">
                             <label class="form-check-label" for="react">
                                 React JS
                             </label>
                         </td>
                         <td>
-                            <input class="form-check-input" type="checkbox" name="tech" value='SocketIO' id="socket">
+                            <input class="form-check-input" type="checkbox" name="tech" value="SocketIO" id="socket">
                             <label class="form-check-label" for="socket">
                                 SocketIO
                             </label>
