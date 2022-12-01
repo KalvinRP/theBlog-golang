@@ -1,27 +1,30 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"html/template"
 	"log"
 	"net/http"
 	"strconv"
+	"theblog/connection"
 	"time"
 
 	"github.com/gorilla/mux"
 )
 
 func main() {
+	connection.DatabaseConnect()
 	route := mux.NewRouter()
 
 	route.PathPrefix("/asset").Handler(http.StripPrefix("/asset", http.FileServer(http.Dir("./asset"))))
 
-	route.HandleFunc("/article/{ID}", article).Methods("GET")
+	route.HandleFunc("/article/{id}", article).Methods("GET")
 	route.HandleFunc("/", home).Methods("GET")
 	route.HandleFunc("/contact", contact).Methods("GET")
 	route.HandleFunc("/add-project", project).Methods("GET")
 	route.HandleFunc("/add-project", addprojects).Methods("POST")
-	route.HandleFunc("/delete/{index}", delete).Methods("GET")
+	route.HandleFunc("/delete/{id}", delete).Methods("GET")
 
 	var port string = "5000"
 	fmt.Print("Server running on port " + port)
@@ -29,21 +32,16 @@ func main() {
 }
 
 type Prj struct {
-	PrjName  string
-	Duration int
-	Desc     string
-	Tech     []string
+	ID         int
+	PrjName    string
+	Start_date time.Time
+	Str_sdate  string
+	End_date   time.Time
+	Str_edate  string
+	Duration   int
+	Desc       string
+	Tech       []string
 	// img      string
-}
-
-var Addprj = []Prj{
-	{
-		PrjName:  "Placeholder",
-		Duration: 22,
-		Desc:     "Lorem ipsum",
-		// Tech:     techno,
-		// img:      fileLocation,
-	},
 }
 
 func addprojects(w http.ResponseWriter, r *http.Request) {
@@ -53,26 +51,13 @@ func addprojects(w http.ResponseWriter, r *http.Request) {
 		log.Fatal(err)
 	}
 
-	pname := r.Form.Get("prjname")
-
-	const format string = "2006-1-2 15:04:05"
-
-	var sdate string = r.Form.Get("sdate")
-	start := sdate + " 00:00:00"       //ditambah jam supaya bisa jalan
-	t1, _ := time.Parse(format, start) //reflect.TypeOf(t1) = time.Time
-
-	var edate string = r.Form.Get("edate")
-	end := edate + " 00:00:00"
-	t2, _ := time.Parse(format, end) //reflect.TypeOf(t2) = time.Time
-
-	Duration := t2.Sub(t1)
-	duratext := int(Duration.Hours() / 24)
-
+	name := r.Form.Get("prjname")
+	sdate := r.Form.Get("sdate")
+	edate := r.Form.Get("edate")
 	Desc := r.Form.Get("desc")
-
 	techno := r.Form["tech"]
-
 	// image, imgname, err := r.FormFile("image")
+
 	// if err != nil {
 	// 	http.Error(w, err.Error(), http.StatusInternalServerError)
 	// 	return
@@ -96,17 +81,27 @@ func addprojects(w http.ResponseWriter, r *http.Request) {
 	// 	return
 	// }
 	//fileupload
-	var newprj = Prj{
-		PrjName:  pname,
-		Duration: duratext,
-		Desc:     Desc,
-		Tech:     techno,
-		// img:      fileLocation,
-	}
+
+	// server storage unused due to database connection
+	// var newprj = Prj{
+	// 	PrjName:  name,
+	// 	Duration: duratext,
+	// 	Desc:     Desc,
+	// 	Tech:     techno,
+	// img:      fileLocation,
+	// }
 
 	// fmt.Println(newprj) //Result: Working
 
-	Addprj = append(Addprj, newprj)
+	_, err = connection.Conn.Exec(context.Background(), "INSERT INTO tb_projects(name, description, technologies, Start_date, End_date) VALUES ($1, $2, $3, $4, $5)", name, Desc, techno, sdate, edate)
+	//belum masukin image
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte("Error on INSERT : " + err.Error()))
+		return
+	}
+
+	// Addprj = append(Addprj, newprj)
 
 	http.Redirect(w, r, "/", http.StatusMovedPermanently)
 }
@@ -120,22 +115,41 @@ func home(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	newprj, err := connection.Conn.Query(context.Background(), "SELECT id, name, description, technologies, Start_date, End_date FROM tb_projects ORDER BY id DESC")
+	if err != nil {
+		fmt.Println("Error on SELECT : " + err.Error())
+		return
+	}
+
+	var Addprj = []Prj{}
+
+	for newprj.Next() {
+		var prjData = Prj{}
+		err := newprj.Scan(&prjData.ID, &prjData.PrjName, &prjData.Desc, &prjData.Tech, &prjData.Start_date, &prjData.End_date)
+		if err != nil {
+			fmt.Println("Error on Scan : " + err.Error())
+			return
+		}
+
+		// const format string = "2006-1-2"
+		// t1, _ := time.Parse(format, prjData.Start_date)
+		// t2, _ := time.Parse(format, prjData.End_date) //reflect.TypeOf(t2) = time.Time
+
+		Duration := prjData.End_date.Sub(prjData.Start_date)
+		prjData.Duration = int(Duration.Hours() / 24)
+
+		// prjData.Format_date = prjData.Post_date.Format("2 January 2006")
+
+		Addprj = append(Addprj, prjData)
+	}
+
 	project := map[string]interface{}{
 		"Project": Addprj,
 	}
 
-	// fmt.Println(project) //Result: Working
+	// fmt.Println(Addprj) //Result: Working
 
 	tmpt.Execute(w, project)
-}
-
-func delete(w http.ResponseWriter, r *http.Request) {
-	index, _ := strconv.Atoi(mux.Vars(r)["index"])
-	fmt.Println(index)
-
-	Addprj = append(Addprj[:index], Addprj[index+1:]...)
-
-	http.Redirect(w, r, "/", http.StatusFound)
 }
 
 func contact(w http.ResponseWriter, r *http.Request) {
@@ -171,25 +185,53 @@ func article(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	ID, _ := strconv.Atoi(mux.Vars(r)["ID"])
+	id, _ := strconv.Atoi(mux.Vars(r)["id"])
 
 	var Detail = Prj{}
+	// disabled due to database connection
+	// for index, data := range Addprj {
+	// 	if index == id {
+	// 		Detail = Prj{
+	// 			PrjName:  data.PrjName,
+	// 			Duration: data.Duration,
+	// 			Desc:     data.Desc,
+	// 			Tech:     data.Tech,
+	// 			// img:   data.img,
+	// 		}
+	// 	}
+	// }
+	err = connection.Conn.QueryRow(context.Background(), "SELECT id, name, description, technologies, Start_date, End_date FROM tb_projects WHERE id=$1", id).Scan(
+		&Detail.ID, &Detail.PrjName, &Detail.Desc, &Detail.Tech, &Detail.Start_date, &Detail.End_date,
+	)
 
-	for index, data := range Addprj {
-		if index == ID {
-			Detail = Prj{
-				PrjName:  data.PrjName,
-				Duration: data.Duration,
-				Desc:     data.Desc,
-				Tech:     data.Tech,
-				// img:   data.img,
-			}
-		}
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte("message : " + err.Error()))
+		return
 	}
+
+	Duration := Detail.End_date.Sub(Detail.Start_date)
+	Detail.Duration = int(Duration.Hours() / 24)
+	Detail.Str_sdate = Detail.Start_date.Format("2 January 2006")
+	Detail.Str_edate = Detail.End_date.Format("2 January 2006")
 
 	article := map[string]interface{}{
 		"Article": Detail,
 	}
 
 	tmpt.Execute(w, article)
+}
+
+func delete(w http.ResponseWriter, r *http.Request) {
+	id, _ := strconv.Atoi(mux.Vars(r)["id"])
+
+	// Addprj = append(Addprj[:index], Addprj[index+1:]...)
+	_, err := connection.Conn.Exec(context.Background(), "DELETE FROM tb_projects WHERE id=$1", id)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte("Error on DELETE : " + err.Error()))
+		return
+	}
+
+	http.Redirect(w, r, "/", http.StatusMovedPermanently)
 }

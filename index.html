@@ -66,10 +66,10 @@
         {{range $index, $data := .Project}}
         <div class="container-md container-card bg-light py-4 mb-3">
             <div class="d-flex justify-content-center mx-3">
-                <img src="asset/dummy-4.jpg" style="width: 15rem; height: 20rem; object-fit: cover;">
+                <img src="asset/dummy-ultimate.png" style="width: 15rem; height: 20rem; object-fit: cover;">
             </div>
             <div class="text-center fw-bold my-3 fs-3">
-                <a href="/article/{{$index}}" target="_blank" class="prjtitle">{{$data.PrjName}}</a>
+                <a href="/article/{{$data.ID}}" target="_blank" class="prjtitle">{{$data.PrjName}}</a>
             </div>
             <div>
                 <p class="lh-sm mx-4 text-muted">durasi: {{$data.Duration}} hari</p>
@@ -77,12 +77,12 @@
             <div>
                 <p class="lh-sm justify mx-4">{{$data.Desc}}</p>
             </div>
-            <div class="ms-4 mb-3">
+            <div class="ms-4 mb-3 overflow">
                 {{$data.Tech}}
             </div>
             <div>
                 <a href="#" target="_blank" class="button">edit</a>
-                <a href="/delete/{{$index}}" target="_blank" class="button">delete</a>
+                <a href="/delete/{{$data.ID}}" target="_blank" class="button">delete</a>
             </div>
         </div>
         {{end}}
