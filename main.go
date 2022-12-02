@@ -10,6 +10,7 @@ import (
 	"os"
 	"path/filepath"
 	"strconv"
+	"strings"
 	"theblog/connection"
 	"time"
 
@@ -60,6 +61,17 @@ type User struct {
 	Name     string
 	Email    string
 	Password string
+}
+
+type MetaData struct {
+	Title     string
+	IsLogin   bool
+	UserName  string
+	FlashData string
+}
+
+var Data = MetaData{
+	Title: "Personal Web",
 }
 
 func addprojects(w http.ResponseWriter, r *http.Request) {
@@ -149,10 +161,6 @@ func home(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		// const format string = "2006-1-2"
-		// t1, _ := time.Parse(format, prjData.Start_date)
-		// t2, _ := time.Parse(format, prjData.End_date) //reflect.TypeOf(t2) = time.Time
-
 		Duration := prjData.End_date.Sub(prjData.Start_date)
 		prjData.Duration = int(Duration.Hours() / 24)
 
@@ -161,13 +169,41 @@ func home(w http.ResponseWriter, r *http.Request) {
 		Addprj = append(Addprj, prjData)
 	}
 
-	project := map[string]interface{}{
-		"Project": Addprj,
-	}
+	// project := map[string]interface{}{
+	// 	"Project": Addprj,
+	// }
 
 	// fmt.Println(Addprj) //Result: Working
 
-	tmpt.Execute(w, project)
+	var store = sessions.NewCookieStore([]byte("SESSIONS_ID"))
+	session, _ := store.Get(r, "SESSIONS_ID")
+
+	if session.Values["IsLogin"] != true {
+		Data.IsLogin = false
+	} else {
+		Data.IsLogin = session.Values["IsLogin"].(bool)
+		Data.UserName = session.Values["Name"].(string)
+	}
+
+	fm := session.Flashes("message")
+
+	var flashes []string
+	if len(fm) > 0 {
+		session.Save(r, w)
+
+		for _, fl := range fm {
+			flashes = append(flashes, fl.(string))
+		}
+	}
+
+	Data.FlashData = strings.Join(flashes, "")
+
+	Compile := map[string]interface{}{
+		"Project":   Addprj,
+		"DataLogin": Data,
+	}
+
+	tmpt.Execute(w, Compile)
 }
 
 func contact(w http.ResponseWriter, r *http.Request) {
@@ -273,11 +309,11 @@ func reginput(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	name := r.Form.Get("nama")
-	email := r.Form.Get("surel")
+	name := r.PostForm.Get("nama")
+	email := r.PostForm.Get("surel")
 
-	password := r.Form.Get("sandi")
-	passwordHash, _ := bcrypt.GenerateFromPassword([]byte(password), 10)
+	password := r.PostForm.Get("sandi")
+	passwordHash, _ := bcrypt.GenerateFromPassword([]byte(password), 13)
 
 	_, err = connection.Conn.Exec(context.Background(), "INSERT INTO tb_user(name, email, password) VALUES ($1, $2, $3)", name, email, passwordHash)
 	if err != nil {
@@ -307,16 +343,20 @@ func login(w http.ResponseWriter, r *http.Request) {
 }
 
 func loginput(w http.ResponseWriter, r *http.Request) {
+	err := r.ParseForm()
+	if err != nil {
+		w.Write([]byte(err.Error()))
+		return
+	}
+
 	var store = sessions.NewCookieStore([]byte("SESSIONS_ID"))
 	session, _ := store.Get(r, "SESSIONS_ID")
 
-	email := r.Form.Get("surel")
-	password := r.Form.Get("sandi")
-	fmt.Println(email)
-
+	email := r.PostForm.Get("surel")
+	password := r.PostForm.Get("sandi")
 	user := User{}
 
-	err := connection.Conn.QueryRow(context.Background(), "SELECT name, email, password FROM tb_user WHERE email=$1", email).Scan(&user.Name, &user.Email, &user.Password)
+	err = connection.Conn.QueryRow(context.Background(), "SELECT * FROM tb_user WHERE email=$1", email).Scan(&user.ID, &user.Name, &user.Email, &user.Password)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		w.Write([]byte("Error on SELECT : " + err.Error()))
